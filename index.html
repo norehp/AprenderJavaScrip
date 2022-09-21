@@ -4,15 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculadora</title>
 </head>
 <body>
-    <input type="text" name="parametro-a" value="">
-    <input type="text" name="parametro-a" value="">
+    <input type="text" name="parametro-a" value="" onchange="handleTextChangeA(event)" placeholder="Este es valor a" >
+    
+    <input type="text" name="parametro-b" value="" onchange="handleTextChangeB(event)" placeholder="Este es valor B" >
+
+    <button onclick="sumar()">
+        <p>Suma!</p>
+    </button>
+
     <script>
         let textA;
         let textB;
-        
+
+        const handleTextChangeA = (event) => {
+            textA = event.target.value;
+        }
+
+        const handleTextChangeB = (event) => {
+            textB = event.target.value;
+        }
+
+        const sumar = () => {
+            console.log(Number(textA) + Number(textB))
+        }
+
     </script>
 </body>
 </html>
