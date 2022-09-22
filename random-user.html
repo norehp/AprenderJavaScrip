@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            background-color: chocolate;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .user-image{
+            height: 100px;
+            width: 100px;
+            object-fit: cover;
+            border-radius: 50px;
+        }
+        .main-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <p id="user-name"></p>
+        <img class="user-image" id="user-image" src="" alt="fotografia de usuario aleatoria">
+    </div>
+
+    <script>
+        let userTagName = document.getElementById('user-name');
+        let userTagImage = document.getElementById('user-image');
+
+        const getUser= async() => {
+            const respuesta = await fetch ('https://randomuser.me/api')
+                .then((res)=>{
+                    return res.json() 
+                        .then((r)=>{
+                            return r
+                        })
+                        .catch((err)=>{
+                            console.error(err)
+                        })
+                })
+                .catch ((error) => {
+                    console.error(error)
+                })
+                debugger
+                return {
+                    name: respuesta.results[0].name.first,
+                    surname: '' + respuesta.results[0].name.last,
+                    photo: respuesta.results[0].picture.large,
+                }
+
+            }
+
+        //const user = getUser()
+        // //.then((answer) => {
+        //     return
+        // })
+        // .catch((er) =>{
+        //     console.error(er)
+        // })
+        getUser()
+        .then((res)=>{
+            userTagName.innerText = `${res.name} ${res.surname}`;
+            userTagImage.scr = `${res.photo}`;
+        })    
+        .catch((error)=>{
+            console.error(error)
+        })
+
+ 
+    </script>
+</body>
+</html>
